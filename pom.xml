@@ -1,0 +1,78 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.automationexercise</groupId>
+  <artifactId>AutomationExerciseFramework</artifactId>
+  <version>1.0.0</version>
+  <name>AutomationExerciseFramework</name>
+  <description>A Hybrid Test Automation Framework developed using Java, Selenium WebDriver, Maven, and TestNG for automating the Automation Exercise e-commerce website. The framework follows the Page Object Model (POM) design pattern and includes reusable utilities, data-driven testing, cross-browser execution, Extent Reports, Log4j2 logging, screenshots on failure, and CI/CD integration with Jenkins.</description>
+
+<properties>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<selenium.version>4.45.0</selenium.version>
+		<testng.version>7.12.0</testng.version>
+		<restassured.version>5.5.6</restassured.version>
+		<allure.version>2.29.1</allure.version>
+		<webdrivermanager.version>6.2.0</webdrivermanager.version>
+		<cucumber.version>7.20.1</cucumber.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- Selenium -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+
+		<!-- WebDriverManager -->
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>${webdrivermanager.version}</version>
+		</dependency>
+
+		<!-- TestNG -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+		</dependency>
+
+		<!-- Rest Assured -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>${restassured.version}</version>
+		</dependency>
+
+		<!-- Allure TestNG -->
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-testng</artifactId>
+			<version>${allure.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		
+
+		<!-- Cucumber with TestNG -->
+		<dependency>
+			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-java</artifactId>
+			<version>${cucumber.version}</version>
+
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.16.1</version>
+		</dependency>
+
+	</dependencies>
+
+
+</project>

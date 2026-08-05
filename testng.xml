@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="AutomationExerciseFramework">
+
+	<test name="AutomationExerciseTests">
+
+		<classes>
+			<class name="test.sinupTest" />
+			<class name="test.loginTest" />
+		</classes>
+
+	</test>
+
+</suite>

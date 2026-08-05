@@ -1,0 +1,1 @@
+{"uuid":"a60d14a8-0815-43ba-8049-cc3ee2b612e9","name":"test.sinupTest","children":["9f996f9a-41dd-4e5b-b3f0-028eef3f23bf"],"befores":[{"name":"signupPageSetup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1785905031472,"stop":1785905039506}],"afters":[],"start":1785905031453,"stop":1785905041600}
