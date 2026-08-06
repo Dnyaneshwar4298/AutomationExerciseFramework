@@ -1,5 +1,7 @@
 package test;
 
+import java.awt.AWTException;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -22,7 +24,7 @@ public class sinupTest {
 
     
     @BeforeClass
-    public void setup() {
+    public void setup(){
 
         base.openBrowser();
 

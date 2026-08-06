@@ -1,5 +1,7 @@
 package test;
 
+import java.awt.AWTException;
+
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import base.baseClass;

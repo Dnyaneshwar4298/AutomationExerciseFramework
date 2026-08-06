@@ -1,5 +1,7 @@
 package test;
 
+import java.awt.AWTException;
+
 import org.openqa.selenium.By;
 
 import org.testng.Assert;

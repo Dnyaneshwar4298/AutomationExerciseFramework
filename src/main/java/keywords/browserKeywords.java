@@ -1,7 +1,9 @@
 package keywords;
 
+
 import java.time.Duration;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -48,6 +50,14 @@ public class browserKeywords {
 	public static void fullscreen() {
 		driver.manage().window().fullscreen();
 	}
+	
+	
+	//minimize screen
+	public static void screenreduce() {
+		driver.manage().window().setSize(new Dimension(800, 600));
+
+	}
+	
 
 	// Get Current URL
 	public static String getCurrentUrl() {
