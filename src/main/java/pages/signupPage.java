@@ -7,10 +7,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import base.baseClass;
+import base.BaseClass;
 import keywords.browserKeywords;
 
-public class signupPage extends baseClass {
+public class signupPage extends BaseClass {
 
 	public static WebDriver driver = browserKeywords.getDriver();
 	public static String email = "user" + System.currentTimeMillis() + "@gmail.com";
@@ -33,6 +33,7 @@ public class signupPage extends baseClass {
 
 	public static void enterSignupCredentials() {
 		newUserName.sendKeys("Danny");
+		scrollWindow();
 		System.err.println(email);
 		newUserEmail.click();
 		newUserEmail.sendKeys(email);

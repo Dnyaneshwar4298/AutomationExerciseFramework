@@ -4,13 +4,13 @@ import java.awt.AWTException;
 
 import org.testng.annotations.Test;
 
-import base.baseClass;
+import base.BaseClass;
 import pages.productPage;
 
 
 public class productTesting {
 	
-	baseClass base = new baseClass();
+	BaseClass base = new BaseClass();
 	productPage productPage;
 	@Test
 	public void VarifyAllProductVisibleOnScreen(){
@@ -19,6 +19,6 @@ public class productTesting {
 		productPage.clickOnProduct();
 		productPage.isAllProductVisibleOnScreen();
 		productPage.clickOnFirstProduct();
-		//base.closeBrowser();
+		base.closeBrowser();
 	}
 }

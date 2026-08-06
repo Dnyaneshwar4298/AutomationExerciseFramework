@@ -1,16 +1,16 @@
 package test;
 
-import java.awt.AWTException;
+
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import base.baseClass;
+import base.BaseClass;
 import pages.homePage;
 import pages.loginPage;
 import pages.signupPage;
 
 public class loginTest extends loginPage{
-	private baseClass base = new baseClass();
+	private BaseClass base = new BaseClass();
 	private homePage homePage;
 	private signupPage signupPage;
 	private loginPage loginPage;

@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import base.baseClass;
+import base.BaseClass;
 
 import pages.AccountInformationPage;
 import pages.homePage;
@@ -14,7 +14,7 @@ import pages.signupPage;
 
 public class sinupTest {
 
-    private baseClass base = new baseClass();
+    private BaseClass base = new BaseClass();
 
     private homePage homePage;
     private signupPage signupPage;
@@ -67,6 +67,7 @@ public class sinupTest {
         System.err.println("zipcode entered");
         accountInformationPage.enterMobileNumber("9876543210");
         System.err.println("mobilenumber entered");
+        signupPage.scrollWindow();
         accountInformationPage.clickCreateAccount();
         
         Thread.sleep(2000);

@@ -1,20 +1,20 @@
 package test;
 
-import java.awt.AWTException;
+
 
 import org.openqa.selenium.By;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.baseClass;
+import base.BaseClass;
 import keywords.browserKeywords;
 import pages.homePage;
 import pages.signupPage;
 
 
 public class contactUsFeatureTest {
-	private baseClass base = new baseClass();
+	private BaseClass base = new BaseClass();
 	private homePage homePage;
 	
 	

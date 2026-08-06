@@ -59,9 +59,10 @@ public class homePage {
 		massage.sendKeys(msg);
 		pages.signupPage.scrollWindow();
 		uploadFile.sendKeys("/Users/danny/Library/Mobile Documents/com~apple~CloudDocs/Updated Resume /Automation");
+		signupPage.scrollWindow();
 		System.err.println("File Uploaded");
 		submitBtn.click();
-		System.out.println("Form submitted");
+		System.err.println("Form submitted");
 		signupPage.alertHandling();
 	}
 
