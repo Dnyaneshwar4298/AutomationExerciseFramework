@@ -2,11 +2,17 @@
 
 <suite name="AutomationExerciseFramework">
 
-	<test name="AutomationExerciseTests">
+<listeners>
+		<listener class-name="listeners.TestListener"/>
+	</listeners>
 
+	<test name="AutomationExerciseTests">
+	
 		<classes>
 			<class name="test.sinupTest" />
 			<class name="test.loginTest" />
+			<class name="test.contactUsFeatureTest" />
+			
 		</classes>
 
 	</test>

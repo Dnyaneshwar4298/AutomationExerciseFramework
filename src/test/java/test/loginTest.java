@@ -21,14 +21,18 @@ public class loginTest extends loginPage{
 		homePage.clickSignUpLogin();
 		System.out.println("Clicked on Signup/Login button");
 	}
+	
+	
 	@Test
 	public void varifyValidLogin() {
 		signupPage = new signupPage();
 		loginPage = new loginPage();
-		pages.loginPage.validLogin("danny1@gmail.com", "Danny1234");
+		pages.loginPage.validLogin(pages.signupPage.email, "Danny1234");
 		//pages.signupPage.scrollWindow();
 		pages.loginPage.ClickonLoginBtn();
+		System.out.println("Login successfull");
 		base.closeBrowser();
 	}
+	
 	
 }

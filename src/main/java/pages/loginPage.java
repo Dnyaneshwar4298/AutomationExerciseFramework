@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class loginPage {
 	
+	
 	public loginPage() {
 		PageFactory.initElements(keywords.browserKeywords.getDriver() ,this);
 	}
@@ -33,8 +34,9 @@ public class loginPage {
     
     //===================== project Methods =====================
     
-	public  void enterEmail(String email) {
+	  private static void enterEmail(String email) {
 		enterText(emailAddress, email);
+	
 		System.err.println("Entered email id ");
 
 	}
@@ -58,5 +60,7 @@ public class loginPage {
         System.err.println("password entered");
         
 	}
+	
+
 
 }

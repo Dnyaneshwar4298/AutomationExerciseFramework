@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -12,6 +13,7 @@ import keywords.browserKeywords;
 public class signupPage extends baseClass {
 
 	public static WebDriver driver = browserKeywords.getDriver();
+	public static String email = "user" + System.currentTimeMillis() + "@gmail.com";
 
 	// New User Signup
 	@FindBy(name = "name")
@@ -28,20 +30,29 @@ public class signupPage extends baseClass {
 		PageFactory.initElements(browserKeywords.getDriver(), this);
 	}
 
-	public static void registerNewUser(String name, String email) {
-		newUserName.sendKeys(name);
+
+	public static void enterSignupCredentials() {
+		newUserName.sendKeys("Danny");
+		System.err.println(email);
+		newUserEmail.click();
 		newUserEmail.sendKeys(email);
 		scrollWindow();
 		signupButton.click();
 
 	}
 
+
 	public static void scrollWindow() {
 		Actions actions = new Actions(driver);
 		actions.scrollByAmount(0, 300).perform();
+
+	}
+	
+	public static void alertHandling() {
+		Alert handleAlert = driver.switchTo().alert();
+		handleAlert.accept();
 		
 
 	}
-
 
 }

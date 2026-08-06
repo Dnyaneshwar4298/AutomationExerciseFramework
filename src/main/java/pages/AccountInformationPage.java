@@ -13,7 +13,7 @@ public class AccountInformationPage {
 
     // Account Information
 
-    @FindBy(css = "[data-qa='password']")
+    @FindBy(css = "[data-qa='password']") // encapsulation
     private WebElement password;
 
     @FindBy(css = "input[data-qa='title']")

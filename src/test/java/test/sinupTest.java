@@ -18,7 +18,9 @@ public class sinupTest {
     private signupPage signupPage;
     private AccountInformationPage accountInformationPage;
    
+    String email = "user" + System.currentTimeMillis() + "@gmail.com";
 
+    
     @BeforeClass
     public void setup() {
 
@@ -31,17 +33,14 @@ public class sinupTest {
         System.out.println("Clicked on Signup/Login button");
     }
 
+
     @Test(priority = 1)
-    public void verifyNewUserSignUp() {
+    public  void verifyRegisterNewUser() {
+		pages.signupPage.enterSignupCredentials();
+	}
+    
 
-        pages.signupPage.registerNewUser("Danny", "danny1@gmail.com");
-        pages.signupPage.scrollWindow();
-        
-
-        System.out.println("Window Scrolled");
-    }
-
-    @Test(priority = 2)
+    @Test (priority = 2)
     public void verifyAccountInformation() throws InterruptedException{
     	
     	accountInformationPage.enterPassword("Danny1234");
@@ -78,4 +77,5 @@ public class sinupTest {
         System.out.println("Account Created Successfully");
         base.closeBrowser();
     }
+    
 }

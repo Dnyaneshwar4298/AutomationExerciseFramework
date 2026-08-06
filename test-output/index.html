@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-AutomationExerciseFramework" class="navigator-link">
-              <span class="suite-name border-passed">AutomationExerciseFramework</span>
+              <span class="suite-name border-failed">AutomationExerciseFramework</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -92,7 +92,21 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">3 methods,   3 passed</span>
+                    <span class="method-stats">4 methods, 1 failed,   3 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-AutomationExerciseFramework" class="hide-methods failed suite-AutomationExerciseFramework"> (hide)</a> <!-- hide-methods failed suite-AutomationExerciseFramework -->
+                      <a href="#" panel-name="suite-AutomationExerciseFramework" class="show-methods failed suite-AutomationExerciseFramework"> (show)</a> <!-- show-methods failed suite-AutomationExerciseFramework -->
+                    </span>
+                    <div class="method-list-content failed suite-AutomationExerciseFramework">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-AutomationExerciseFramework" title="test.contactUsFeatureTest" class="method navigator-link" hash-for-method="fillContactUsForm">fillContactUsForm</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-AutomationExerciseFramework -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -113,7 +127,7 @@
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-AutomationExerciseFramework" title="test.sinupTest" class="method navigator-link" hash-for-method="verifyNewUserSignUp">verifyNewUserSignUp</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-AutomationExerciseFramework" title="test.sinupTest" class="method navigator-link" hash-for-method="verifyRegisterNewUser">verifyRegisterNewUser</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-AutomationExerciseFramework -->
@@ -128,6 +142,40 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-AutomationExerciseFramework" class="panel AutomationExerciseFramework">
+          <div class="suite-AutomationExerciseFramework-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">test.contactUsFeatureTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="fillContactUsForm">
+                  </a> <!-- fillContactUsForm -->
+                  <span class="method-name">fillContactUsForm</span>
+                  <div class="stack-trace">org.openqa.selenium.NoSuchSessionException: Session ID is null. Using WebDriver after calling quit()?
+Build info: version: &apos;4.45.0&apos;, revision: &apos;cd6a3cd cd6a3cdfca6970f62e5bc8344109d0fe0e2af05e&apos;
+System info: os.name: &apos;Mac OS X&apos;, os.arch: &apos;aarch64&apos;, os.version: &apos;26.5.2&apos;, java.version: &apos;26.0.1&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [null, actions {actions=[org.openqa.selenium.interactions.Sequence@e4b6f47]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 150.0.7871.187, chrome: {chromedriverVersion: 150.0.7871.124 (9261fd0a595..., userDataDir: /var/folders/bn/mgbvy3895g5...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:57218}, goog:processID: 8553, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: mac, proxy: Proxy(), se:cdp: ws://localhost:57218/devtoo..., se:cdpVersion: 150.0.7871.187, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:161)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:217)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:175)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:575)
+	at org.openqa.selenium.remote.RemoteWebDriver.perform(RemoteWebDriver.java:670)
+	at org.openqa.selenium.interactions.Actions$BuiltAction.perform(Actions.java:612)
+	at org.openqa.selenium.interactions.Actions.perform(Actions.java:577)
+	at pages.signupPage.scrollWindow(signupPage.java:47)
+	at pages.homePage.fillContactUsForm(homePage.java:60)
+	at test.contactUsFeatureTest.fillContactUsForm(contactUsFeatureTest.java:30)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+... Removed 25 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-AutomationExerciseFramework-class-failed -->
           <div class="suite-AutomationExerciseFramework-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
@@ -143,9 +191,9 @@
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="verifyNewUserSignUp">
-                  </a> <!-- verifyNewUserSignUp -->
-                  <span class="method-name">verifyNewUserSignUp</span>
+                  <a name="verifyRegisterNewUser">
+                  </a> <!-- verifyRegisterNewUser -->
+                  <span class="method-name">verifyRegisterNewUser</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -175,10 +223,14 @@
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite name=&quot;AutomationExerciseFramework&quot;&gt;
+  &lt;listeners&gt;
+    &lt;listener class-name=&quot;listeners.TestListener&quot;/&gt;
+  &lt;/listeners&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;AutomationExerciseTests&quot;&gt;
     &lt;classes&gt;
       &lt;class name=&quot;test.sinupTest&quot;/&gt;
       &lt;class name=&quot;test.loginTest&quot;/&gt;
+      &lt;class name=&quot;test.contactUsFeatureTest&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- AutomationExerciseTests --&gt;
 &lt;/suite&gt; &lt;!-- AutomationExerciseFramework --&gt;
@@ -192,7 +244,7 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">AutomationExerciseTests (2 classes)</span>
+                <span class="test-name">AutomationExerciseTests (3 classes)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -218,24 +270,28 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(3);
+data.addRows(4);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'verifyAccountInformation')
-data.setCell(0, 2, 'test.sinupTest')
-data.setCell(0, 3, 20190);
+data.setCell(0, 1, 'fillContactUsForm')
+data.setCell(0, 2, 'test.contactUsFeatureTest')
+data.setCell(0, 3, 8571);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'verifyNewUserSignUp')
+data.setCell(1, 1, 'verifyAccountInformation')
 data.setCell(1, 2, 'test.sinupTest')
-data.setCell(1, 3, 3950);
+data.setCell(1, 3, 6551);
 data.setCell(2, 0, 2)
 data.setCell(2, 1, 'varifyValidLogin')
 data.setCell(2, 2, 'test.loginTest')
-data.setCell(2, 3, 297);
+data.setCell(2, 3, 2907);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'verifyRegisterNewUser')
+data.setCell(3, 2, 'test.sinupTest')
+data.setCell(3, 3, 550);
 window.suiteTableData['AutomationExerciseFramework']= { tableData: data, tableDiv: 'times-div-AutomationExerciseFramework'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 24 seconds</span>
+              <span class="suite-total-time">Total running time: 18 seconds</span>
               <div id="times-div-AutomationExerciseFramework">
               </div> <!-- times-div-AutomationExerciseFramework -->
             </div> <!-- times-div -->
@@ -267,23 +323,32 @@ return data;
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">verifyNewUserSignUp</span>
-                <span class="method-start">11603 ms</span>
+                <span class="method-name">verifyRegisterNewUser</span>
+                <span class="method-start">7619 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">verifyAccountInformation</span>
-                <span class="method-start">15581 ms</span>
+                <span class="method-start">8203 ms</span>
               </div> <!-- test-method -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">test.loginTest</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">setup</span>
-                <span class="method-start">35776 ms</span>
+                <span class="method-start">14755 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">varifyValidLogin</span>
-                <span class="method-start">46162 ms</span>
+                <span class="method-start">22450 ms</span>
+              </div> <!-- test-method -->
+            </div> <!-- chronological-class -->
+            <div class="chronological-class">
+              <div class="chronological-class-name">test.contactUsFeatureTest</div> <!-- chronological-class-name -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">fillContactUsForm</span>
+                <span class="method-start">25360 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
