@@ -5,6 +5,7 @@ package test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import base.BaseClass;
+import keywords.browserKeywords;
 import pages.homePage;
 import pages.loginPage;
 import pages.signupPage;
@@ -29,8 +30,8 @@ public class loginTest extends loginPage{
 	public void varifyValidLogin() {
 		signupPage = new signupPage();
 		loginPage = new loginPage();
-		pages.loginPage.validLogin(pages.signupPage.email, "Danny1234");
-		//pages.signupPage.scrollWindow();
+		pages.loginPage.validLogin(browserKeywords.email, "Danny1234");
+		pages.signupPage.scrollWindow();
 		pages.loginPage.ClickonLoginBtn();
 		System.out.println("Login successfull");
 		base.closeBrowser();

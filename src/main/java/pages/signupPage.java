@@ -13,7 +13,7 @@ import keywords.browserKeywords;
 public class signupPage extends BaseClass {
 
 	public static WebDriver driver = browserKeywords.getDriver();
-	public static String email = "user" + System.currentTimeMillis() + "@gmail.com";
+	//public static String email = "user" + System.currentTimeMillis() + "@gmail.com";
 
 	// New User Signup
 	@FindBy(name = "name")
@@ -34,9 +34,9 @@ public class signupPage extends BaseClass {
 	public static void enterSignupCredentials() {
 		newUserName.sendKeys("Danny");
 		scrollWindow();
-		System.err.println(email);
 		newUserEmail.click();
-		newUserEmail.sendKeys(email);
+		newUserEmail.sendKeys(browserKeywords.email);
+		System.err.println("signup mail :"+ browserKeywords.email);
 		scrollWindow();
 		signupButton.click();
 

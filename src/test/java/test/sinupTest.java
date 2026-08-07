@@ -20,7 +20,7 @@ public class sinupTest {
     private signupPage signupPage;
     private AccountInformationPage accountInformationPage;
    
-    String email = "user" + System.currentTimeMillis() + "@gmail.com";
+  // String email = "user" + System.currentTimeMillis() + "@gmail.com";
 
     
     @BeforeClass
@@ -84,8 +84,7 @@ public class sinupTest {
     // nagative SignUpTestCase
     
   
-  @Test (priority =1)
-    public void VarifySignUpWithExstingCredentials() throws InterruptedException {
+      public void VarifySignUpWithExstingCredentials() throws InterruptedException {
 	  
 		signupPage.enterExistingSignUpCredentials("danny", "Dnyaneshwar.tod@gmail.com");
 		accountInformationPage.enterPassword("Danny1234");

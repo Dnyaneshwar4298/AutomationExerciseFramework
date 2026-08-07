@@ -23,7 +23,7 @@ public class contactUsFeatureTest {
 		
 		base.openBrowser();
 		homePage = new homePage();
-		homePage.fillContactUsForm("Danny", signupPage.email, "Call me back", "having issue with the login detials");
+		homePage.fillContactUsForm("Danny", browserKeywords.email, "Call me back", "having issue with the login detials");
 		
 		String actualResponse = browserKeywords.getDriver()
 		        .findElement(By.xpath("//div[@class='status alert alert-success']"))
@@ -36,5 +36,7 @@ public class contactUsFeatureTest {
 		System.err.println("Assertion Passed");
 		base.closeBrowser();
 	}
+	
+	
 	
 }

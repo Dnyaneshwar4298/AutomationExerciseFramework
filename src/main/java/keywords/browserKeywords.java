@@ -73,4 +73,6 @@ public class browserKeywords {
 		
 		return driver;
 	}
+	
+	public static String email = "user" + System.currentTimeMillis() + "@gmail.com";
 }

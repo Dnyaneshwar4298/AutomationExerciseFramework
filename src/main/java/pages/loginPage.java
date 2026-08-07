@@ -55,7 +55,7 @@ public class loginPage {
 	
 	public static void validLogin(String email , String pwd) {	
 		enterText(emailAddress, email);
-		System.err.println("Entered email id ");
+		System.err.println("Entered login email id " + email);
 		enterText(password, pwd);
         System.err.println("password entered");
         
