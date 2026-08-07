@@ -17,7 +17,6 @@ public class BaseClass {
 	public void openBrowser(){
 		String browser = ConfigReader.getProperties("browser");
         String url = ConfigReader.getProperties("baseUrl");
-
         browserKeywords.openBrowser(browser);
         browserKeywords.openUrl(url);
 	}

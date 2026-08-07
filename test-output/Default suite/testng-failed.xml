@@ -6,8 +6,7 @@
       <class name="test.sinupTest">
         <methods>
           <include name="setup"/>
-          <include name="verifyAccountInformation"/>
-          <include name="verifyRegisterNewUser"/>
+          <include name="VarifySignUpWithExstingCredentials"/>
         </methods>
       </class> <!-- test.sinupTest -->
     </classes>

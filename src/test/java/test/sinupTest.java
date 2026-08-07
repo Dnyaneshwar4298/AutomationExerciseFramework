@@ -81,4 +81,42 @@ public class sinupTest {
         base.closeBrowser();
     }
     
+    // nagative SignUpTestCase
+    
+  
+  @Test (priority =1)
+    public void VarifySignUpWithExstingCredentials() throws InterruptedException {
+	  
+		signupPage.enterExistingSignUpCredentials("danny", "Dnyaneshwar.tod@gmail.com");
+		accountInformationPage.enterPassword("Danny1234");
+    	System.err.println("password entered");
+    	accountInformationPage.selectDay(29);
+        accountInformationPage.selectMonth("April");
+        accountInformationPage.selectYear("1998");
+        System.err.println("DOB entered");
+        accountInformationPage.enterFirstName("Danny");
+        System.err.println("frirstname entered");
+        accountInformationPage.enterLastName("Patil");
+        System.err.println("lastname entered");
+        accountInformationPage.enterAddress("Pune Hinjewadi");
+        System.err.println("address entered");
+        accountInformationPage.selectCountry("Canada");
+        System.err.println("selected country");
+        accountInformationPage.enterState("Maharashtra");
+        System.err.println("state entered");
+        accountInformationPage.enterCity("Pune");
+        System.err.println("city entered");
+        accountInformationPage.enterZipCode("411057");
+        System.err.println("zipcode entered");
+        accountInformationPage.enterMobileNumber("9876543210");
+        System.err.println("mobilenumber entered");
+        signupPage.scrollWindow();
+        accountInformationPage.clickCreateAccount();
+        
+        Thread.sleep(2000);
+        accountInformationPage.clickContinue();
+        
+	}
+  
+    
 }

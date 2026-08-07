@@ -53,7 +53,15 @@ public class signupPage extends BaseClass {
 		Alert handleAlert = driver.switchTo().alert();
 		handleAlert.accept();
 		
+	}
+	
+	public static  void enterExistingSignUpCredentials(String name , String email) {
+		newUserName.sendKeys(name);
+		newUserEmail.sendKeys(email);
+		scrollWindow();
+		signupButton.click();
 
 	}
+	
 
 }
