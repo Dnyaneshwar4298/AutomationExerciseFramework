@@ -4,6 +4,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
+import keywords.browserKeywords;
 
 public class AccountInformationPage {
 
@@ -66,6 +69,9 @@ public class AccountInformationPage {
 
     @FindBy(xpath = "//b[text()='Account Created!']")
     private WebElement accountCreated;
+    
+    @FindBy(css ="a[href=\"/logout\"]")
+    private WebElement logout;
 
     //===================== Generic Methods =====================
 
@@ -85,8 +91,15 @@ public class AccountInformationPage {
     private void selectByIndex(WebElement element, int index) {
         new Select(element).selectByIndex(index);
     }
+    
 
     //===================== project Methods =====================
+    
+    public void ClickOnlogoutBtn() {
+		logout.click();
+		System.out.println("clicked on LogoutButton");
+
+	}
 
     public void selectMrTitle() {
         titleMr.click();
@@ -156,4 +169,45 @@ public class AccountInformationPage {
     public boolean isAccountCreated() {
         return accountCreated.isDisplayed();
     }
+    
+    public  void verifyAccountInformation() throws InterruptedException {
+    	enterPassword("Danny1234");
+    	
+    	System.err.println("password entered");
+    	selectDay(29);
+       selectMonth("April");
+        selectYear("1998");
+        System.err.println("DOB entered");
+     enterFirstName("Danny");
+        System.err.println("frirstname entered");
+       enterLastName("Patil");
+        System.err.println("lastname entered");
+        enterAddress("Pune Hinjewadi");
+        System.err.println("address entered");
+       selectCountry("Canada");
+        System.err.println("selected country");
+        enterState("Maharashtra");
+        System.err.println("state entered");
+        enterCity("Pune");
+        System.err.println("city entered");
+        enterZipCode("411057");
+        System.err.println("zipcode entered");
+        enterMobileNumber("9876543210");
+        System.err.println("mobilenumber entered");
+        signupPage.scrollWindow();
+        clickCreateAccount();
+        System.err.println("Clicked on Create button");
+        Thread.sleep(2000);
+        signupPage.scrollWindow();
+       clickContinue();
+      signupPage.closeAdPopup();
+       String actualresult = "Account Created!";
+
+       Assert.assertEquals(actualresult, "Account Created!");
+
+       System.out.println("Account Created Successfully");
+       //base.closeBrowser();
+       System.out.println(browserKeywords.getDriver().getCurrentUrl());
+
+	}
 }

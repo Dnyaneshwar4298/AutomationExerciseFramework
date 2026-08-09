@@ -4,11 +4,13 @@ package test;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import base.BaseClass;
 import keywords.browserKeywords;
 import pages.homePage;
 import pages.loginPage;
 import pages.signupPage;
+
 
 public class loginTest extends loginPage{
 	private BaseClass base = new BaseClass();
@@ -34,7 +36,7 @@ public class loginTest extends loginPage{
 		pages.signupPage.scrollWindow();
 		pages.loginPage.ClickonLoginBtn();
 		System.out.println("Login successfull");
-		base.closeBrowser();
+		//base.closeBrowser();
 	}
 	
 	

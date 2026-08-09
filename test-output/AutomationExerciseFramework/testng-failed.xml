@@ -6,6 +6,12 @@
   </listeners>
   <test thread-count="5" name="AutomationExerciseTests(failed)">
     <classes>
+      <class name="test.sinupTest">
+        <methods>
+          <include name="setup"/>
+          <include name="verifyAccountInformation"/>
+        </methods>
+      </class> <!-- test.sinupTest -->
       <class name="test.productTesting">
         <methods>
           <include name="VarifyAllProductVisibleOnScreen"/>

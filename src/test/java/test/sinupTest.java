@@ -1,16 +1,15 @@
 package test;
 
-import java.awt.AWTException;
-
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import base.BaseClass;
-
+import keywords.browserKeywords;
 import pages.AccountInformationPage;
 import pages.homePage;
+import pages.loginPage;
 import pages.signupPage;
+
 
 public class sinupTest {
 
@@ -19,15 +18,14 @@ public class sinupTest {
     private homePage homePage;
     private signupPage signupPage;
     private AccountInformationPage accountInformationPage;
+    
    
   // String email = "user" + System.currentTimeMillis() + "@gmail.com";
 
     
     @BeforeClass
     public void setup(){
-
         base.openBrowser();
-
         homePage = new homePage();
         signupPage = new signupPage();
         accountInformationPage = new AccountInformationPage();
@@ -41,81 +39,24 @@ public class sinupTest {
 		pages.signupPage.enterSignupCredentials();
 	}
     
-
     @Test (priority = 2)
-    public void verifyAccountInformation() throws InterruptedException{
-    	
-    	accountInformationPage.enterPassword("Danny1234");
-    	System.err.println("password entered");
-    	accountInformationPage.selectDay(29);
-        accountInformationPage.selectMonth("April");
-        accountInformationPage.selectYear("1998");
-        System.err.println("DOB entered");
-        accountInformationPage.enterFirstName("Danny");
-        System.err.println("frirstname entered");
-        accountInformationPage.enterLastName("Patil");
-        System.err.println("lastname entered");
-        accountInformationPage.enterAddress("Pune Hinjewadi");
-        System.err.println("address entered");
-        accountInformationPage.selectCountry("Canada");
-        System.err.println("selected country");
-        accountInformationPage.enterState("Maharashtra");
-        System.err.println("state entered");
-        accountInformationPage.enterCity("Pune");
-        System.err.println("city entered");
-        accountInformationPage.enterZipCode("411057");
-        System.err.println("zipcode entered");
-        accountInformationPage.enterMobileNumber("9876543210");
-        System.err.println("mobilenumber entered");
-        signupPage.scrollWindow();
-        accountInformationPage.clickCreateAccount();
-        
-        Thread.sleep(2000);
-        accountInformationPage.clickContinue();
-        
-        String actualresult = "Account Created!";
+    public  void EnterAccountInfo() throws InterruptedException {
+		accountInformationPage.verifyAccountInformation();
 
-        Assert.assertEquals(actualresult, "Account Created!");
-
-        System.out.println("Account Created Successfully");
-        base.closeBrowser();
-    }
-    
-    // nagative SignUpTestCase
-    
-  
-      public void VarifySignUpWithExstingCredentials() throws InterruptedException {
-	  
-		signupPage.enterExistingSignUpCredentials("danny", "Dnyaneshwar.tod@gmail.com");
-		accountInformationPage.enterPassword("Danny1234");
-    	System.err.println("password entered");
-    	accountInformationPage.selectDay(29);
-        accountInformationPage.selectMonth("April");
-        accountInformationPage.selectYear("1998");
-        System.err.println("DOB entered");
-        accountInformationPage.enterFirstName("Danny");
-        System.err.println("frirstname entered");
-        accountInformationPage.enterLastName("Patil");
-        System.err.println("lastname entered");
-        accountInformationPage.enterAddress("Pune Hinjewadi");
-        System.err.println("address entered");
-        accountInformationPage.selectCountry("Canada");
-        System.err.println("selected country");
-        accountInformationPage.enterState("Maharashtra");
-        System.err.println("state entered");
-        accountInformationPage.enterCity("Pune");
-        System.err.println("city entered");
-        accountInformationPage.enterZipCode("411057");
-        System.err.println("zipcode entered");
-        accountInformationPage.enterMobileNumber("9876543210");
-        System.err.println("mobilenumber entered");
-        signupPage.scrollWindow();
-        accountInformationPage.clickCreateAccount();
-        
-        Thread.sleep(2000);
-        accountInformationPage.clickContinue();
-        
 	}
-  
+    
+    @Test (priority =3)
+    public void VarifyLogutModule() {
+		accountInformationPage.ClickOnlogoutBtn();
+
+	}
+    @Test (priority = 4)
+    public void varifyLoginWithExistingCredentials() {
+    	pages.loginPage.validLogin(browserKeywords.email, "Danny1234");
+		pages.signupPage.scrollWindow();
+		pages.loginPage.ClickonLoginBtn();
+		System.out.println("Login successfull");
+
+	}
     
 }

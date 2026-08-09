@@ -1,1 +1,0 @@
-{"uuid":"9a4f93e7-0b73-40aa-a748-35fb15002584","name":"test.sinupTest","children":["c7f87fb6-836e-4855-abda-7e6a38f02eed"],"befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1786103724246,"stop":1786103734225}],"afters":[],"start":1786103724227,"stop":1786103735768}
