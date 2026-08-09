@@ -10,22 +10,31 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-public class Screenshotutil {
+public final class Screenshotutil {
 
-	public static void captureScreenshot(WebDriver driver, String testname) {
+    private Screenshotutil() {
+    }
 
-		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		// This line captures a screenshot of the current browser window and stores it
-		// as a File object.
+    public static void captureScreenshot(WebDriver driver, String testName) {
+        if (driver == null) {
+            return;
+        }
 
-		// timestamp
-		String time = new SimpleDateFormat("HHmmss-dd-MM-yyyy").format(new Date());
+        File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String time = new SimpleDateFormat("HHmmss-dd-MM-yyyy").format(new Date());
 
-		try {
-			FileUtils.copyFile(src,  new File("./Screenshots/" + testname + "-" + time + ".png"));
-			System.out.println("ScreenShot captured Done");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+        File folder = new File("screenshots");
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+
+        File destination = new File(folder, testName + "-" + time + ".png");
+
+        try {
+            FileUtils.copyFile(source, destination);
+            System.out.println("Screenshot captured: " + destination.getAbsolutePath());
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to save screenshot", e);
+        }
+    }
 }

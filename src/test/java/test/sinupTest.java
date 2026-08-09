@@ -1,62 +1,52 @@
 package test;
 
-import org.testng.annotations.BeforeClass;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.BaseClass;
+import base.baseClass;
 import keywords.browserKeywords;
 import pages.AccountInformationPage;
 import pages.homePage;
 import pages.loginPage;
 import pages.signupPage;
+import utility.ConfigReader;
+import utility.TestData;
 
+public class sinupTest extends baseClass {
 
-public class sinupTest {
+    @Test(groups = "registration")
+    public void registerLogoutAndLoginWithSameEmail() {
 
-    private BaseClass base = new BaseClass();
+        homePage homePage = new homePage();
+        signupPage signupPage = new signupPage();
+        AccountInformationPage accountPage = new AccountInformationPage();
+        loginPage loginPage = new loginPage();
 
-    private homePage homePage;
-    private signupPage signupPage;
-    private AccountInformationPage accountInformationPage;
-    
-   
-  // String email = "user" + System.currentTimeMillis() + "@gmail.com";
+        String email = TestData.getEmail();
+        String password = ConfigReader.getProperty("password");
 
-    
-    @BeforeClass
-    public void setup(){
-        base.openBrowser();
-        homePage = new homePage();
-        signupPage = new signupPage();
-        accountInformationPage = new AccountInformationPage();
+        // 1. Open Signup/Login
         homePage.clickSignUpLogin();
-        System.out.println("Clicked on Signup/Login button");
+
+        // 2. Create new user with generated email
+        signupPage.enterSignupCredentials("Danny", email);
+
+        // 3. Complete account information
+        accountPage.completeAccountInformation();
+
+        Assert.assertTrue(homePage.isLoggedIn(),
+                "User should be logged in after account creation");
+
+        // 4. Logout
+        accountPage.logout();
+
+        // 5. Login again with THE SAME email and password
+        loginPage.validLogin(email, password);
+
+        Assert.assertTrue(homePage.isLoggedIn(),
+                "User should be logged in again with the same credentials");
+
+        System.out.println("Login successful with existing email: " + email);
+        System.out.println("Current URL: " + browserKeywords.getCurrentUrl());
     }
-
-
-    @Test(priority = 1)
-    public  void verifyRegisterNewUser() {
-		pages.signupPage.enterSignupCredentials();
-	}
-    
-    @Test (priority = 2)
-    public  void EnterAccountInfo() throws InterruptedException {
-		accountInformationPage.verifyAccountInformation();
-
-	}
-    
-    @Test (priority =3)
-    public void VarifyLogutModule() {
-		accountInformationPage.ClickOnlogoutBtn();
-
-	}
-    @Test (priority = 4)
-    public void varifyLoginWithExistingCredentials() {
-    	pages.loginPage.validLogin(browserKeywords.email, "Danny1234");
-		pages.signupPage.scrollWindow();
-		pages.loginPage.ClickonLoginBtn();
-		System.out.println("Login successfull");
-
-	}
-    
 }

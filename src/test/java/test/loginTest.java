@@ -1,43 +1,29 @@
 package test;
 
-
-
-import org.testng.annotations.BeforeClass;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.BaseClass;
-import keywords.browserKeywords;
+import base.baseClass;
 import pages.homePage;
 import pages.loginPage;
-import pages.signupPage;
+import utility.ConfigReader;
+import utility.TestData;
 
+public class loginTest extends baseClass {
 
-public class loginTest extends loginPage{
-	private BaseClass base = new BaseClass();
-	private homePage homePage;
-	private signupPage signupPage;
-	private loginPage loginPage;
+    @Test(dependsOnGroups = "registration")
+    public void verifyValidLogin() {
+        homePage homePage = new homePage();
+        loginPage loginPage = new loginPage();
 
-	@BeforeClass
-	public void setup() {
-		base.openBrowser();
-		homePage = new homePage();
-		signupPage = new signupPage();
-		homePage.clickSignUpLogin();
-		System.out.println("Clicked on Signup/Login button");
-	}
-	
-	
-	@Test
-	public void varifyValidLogin() {
-		signupPage = new signupPage();
-		loginPage = new loginPage();
-		pages.loginPage.validLogin(browserKeywords.email, "Danny1234");
-		pages.signupPage.scrollWindow();
-		pages.loginPage.ClickonLoginBtn();
-		System.out.println("Login successfull");
-		//base.closeBrowser();
-	}
-	
-	
+        homePage.clickSignUpLogin();
+
+        String email = TestData.getEmail();
+        String password = ConfigReader.getProperty("password");
+
+        loginPage.validLogin(email, password);
+
+        Assert.assertTrue(homePage.isLoggedIn(),
+                "Login was not successful");
+    }
 }

@@ -1,93 +1,45 @@
 package pages;
 
-import java.time.Duration;
-import java.util.concurrent.StructuredTaskScope.TimeoutException;
-
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import base.BaseClass;
 import keywords.browserKeywords;
+import keywords.waitFor;
 
+public class signupPage {
 
-public class signupPage extends BaseClass {
+    private final waitFor wait;
 
-	public static WebDriver driver = browserKeywords.getDriver();
-	//public static String email = "user" + System.currentTimeMillis() + "@gmail.com";
-	
+    @FindBy(name = "name")
+    private WebElement newUserName;
 
+    @FindBy(css = "input[data-qa='signup-email']")
+    private WebElement newUserEmail;
 
-	// New User Signup
-	@FindBy(name = "name")
-	static WebElement newUserName;
+    @FindBy(css = "button[data-qa='signup-button']")
+    private WebElement signupButton;
 
-	@FindBy(css = "input[data-qa='signup-email']")
-	static WebElement newUserEmail;
+    public signupPage() {
+        PageFactory.initElements(browserKeywords.getDriver(), this);
+        wait = new waitFor(browserKeywords.getDriver());
+    }
 
-	@FindBy(css = "button[data-qa=\"signup-button\"]")
-	static WebElement signupButton;
+    public void enterSignupCredentials(String name, String email) {
+        wait.waitForVisibility(newUserName).sendKeys(name);
+        newUserEmail.sendKeys(email);
+        browserKeywords.scrollWindow();
+        wait.waitForClickability(signupButton).click();
+    }
 
-	public signupPage() {
+    public void enterExistingSignupCredentials(String name, String email) {
+        enterSignupCredentials(name, email);
+    }
 
-		PageFactory.initElements(browserKeywords.getDriver(), this);
-	}
-
-
-	public static void enterSignupCredentials() {
-		newUserName.sendKeys("Danny");
-		scrollWindow();
-		newUserEmail.click();
-		newUserEmail.sendKeys(browserKeywords.email);
-
-		System.err.println("signup mail :"+ browserKeywords.email);
-		scrollWindow();
-		signupButton.click();
-
-	}
-
-
-	public static void scrollWindow() {
-		Actions actions = new Actions(driver);
-		actions.scrollByAmount(0, 300).perform();
-
-	}
-	
-	public static void alertHandling() {
-		Alert handleAlert = driver.switchTo().alert();
-		handleAlert.accept();
-		
-	}
-	
-	public static  void enterExistingSignUpCredentials(String name , String email) {
-		newUserName.sendKeys(name);
-		newUserEmail.sendKeys(email);
-		scrollWindow();
-		signupButton.click();
-
-	}
-	
-	public static void closeAdPopup() {
-	    try {
-	        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
-	        WebElement closeButton = wait.until(
-	            ExpectedConditions.elementToBeClickable(
-	                By.xpath("div[class=\"continue-prompt-text\"]")
-	            )
-	        );
-
-	        closeButton.click();
-
-	    } catch (TimeoutException e) {
-	        System.out.println("Ad popup not displayed.");
-	    }
-	}
-
+    public void scrollWindow() {
+        new Actions(browserKeywords.getDriver())
+                .scrollByAmount(0, 400)
+                .perform();
+    }
 }

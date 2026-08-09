@@ -1,42 +1,34 @@
 package test;
 
-
-
-import org.openqa.selenium.By;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import base.BaseClass;
+import base.baseClass;
 import keywords.browserKeywords;
 import pages.homePage;
-import pages.signupPage;
+import utility.ConfigReader;
 
+public class contactUsFeatureTest extends baseClass {
 
-public class contactUsFeatureTest {
-	private BaseClass base = new BaseClass();
-	private homePage homePage;
-	
-	
-	@Test
-	public void fillContactUsForm() {
-		
-		base.openBrowser();
-		homePage = new homePage();
-		homePage.fillContactUsForm("Danny", browserKeywords.email, "Call me back", "having issue with the login detials");
-		
-		String actualResponse = browserKeywords.getDriver()
-		        .findElement(By.xpath("//div[@class='status alert alert-success']"))
-		        .getText()
-		        .trim();
+    @Test
+    public void fillContactUsForm() {
 
-		Assert.assertEquals(actualResponse,
-		        "Success! Your details have been submitted successfully.");
-		
-		System.err.println("Assertion Passed");
-		base.closeBrowser();
-	}
-	
-	
-	
+        homePage homePage = new homePage();
+
+        homePage.fillContactUsForm(
+                ConfigReader.getProperty("contactName"),
+                "contact" + System.currentTimeMillis() + "@gmail.com",
+                ConfigReader.getProperty("contactSubject"),
+                ConfigReader.getProperty("contactMessage"),
+                ConfigReader.getOptionalProperty("uploadFilePath")
+        );
+
+        Assert.assertEquals(
+                homePage.getResponseMessage(),
+                "Success! Your details have been submitted successfully."
+        );
+
+        System.out.println("Contact form submitted successfully");
+        System.out.println("Current URL: " + browserKeywords.getCurrentUrl());
+    }
 }

@@ -1,6 +1,5 @@
 package keywords;
 
-
 import java.time.Duration;
 
 import org.openqa.selenium.WebDriver;
@@ -10,23 +9,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class waitFor {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private final WebDriverWait wait;
 
     public waitFor(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
 
-    // Wait until element is visible
-    public void waitForVisibility(WebElement element) {
-        wait.until(ExpectedConditions.visibilityOf(element));
+    public WebElement waitForVisibility(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    // Wait until element is clickable
-    public void waitForClickability(WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+    public WebElement waitForClickability(WebElement element) {
+        return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
- 
+    public void waitForUrlContains(String value) {
+        wait.until(ExpectedConditions.urlContains(value));
+    }
 }

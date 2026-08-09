@@ -7,6 +7,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 
 public class browserKeywords {
 
@@ -72,6 +73,13 @@ public class browserKeywords {
 	public static WebDriver getDriver() {
 		
 		return driver;
+	}
+	
+	public static void scrollWindow() {
+		Actions actions = new Actions(driver);
+		actions.scrollByAmount(0, 600).perform();
+		
+
 	}
 	
 	public static String email = "user" + System.currentTimeMillis() + "@gmail.com";

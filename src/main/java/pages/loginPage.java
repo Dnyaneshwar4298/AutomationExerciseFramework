@@ -4,63 +4,56 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class loginPage {
-	
-	
-	public loginPage() {
-		PageFactory.initElements(keywords.browserKeywords.getDriver() ,this);
-	}
-	
-	
-	
-	@FindBy(css ="input[data-qa=\"login-email\"]")
-	private static WebElement emailAddress;
-	
-	@FindBy(css = "input[data-qa=\"login-password\"]")
-	private static WebElement password;
-	
-	@FindBy(css = "button[data-qa=\"login-button\"]")
-	private static WebElement ClickonLoginBtn;
-	
-	
-	
-    //===================== Generic Methods =====================
+import keywords.browserKeywords;
+import keywords.waitFor;
 
-    private static void enterText(WebElement element, String value) {
+public class loginPage {
+
+    private final waitFor wait;
+
+    @FindBy(css = "input[data-qa='login-email']")
+    private WebElement emailAddress;
+
+    @FindBy(css = "input[data-qa='login-password']")
+    private WebElement password;
+
+    @FindBy(css = "button[data-qa='login-button']")
+    private WebElement loginButton;
+
+    @FindBy(css = "form[action='/login'] p")
+    private WebElement loginErrorMessage;
+
+    public loginPage() {
+        PageFactory.initElements(browserKeywords.getDriver(), this);
+        wait = new waitFor(browserKeywords.getDriver());
+    }
+
+    private void enterText(WebElement element, String value) {
+        wait.waitForVisibility(element);
         element.clear();
         element.sendKeys(value);
     }
 
-    
-    //===================== project Methods =====================
-    
-	  private static void enterEmail(String email) {
-		enterText(emailAddress, email);
-	
-		System.err.println("Entered email id ");
+    public void enterEmail(String email) {
+        enterText(emailAddress, email);
+    }
 
-	}
-	
-	 public void enterPassword(String pwd) {
-	        enterText(password, pwd);
-	        System.err.println("password entered");
-	    }
-	 
-	public static void ClickonLoginBtn() {
-		ClickonLoginBtn.click();
-		System.err.println("clicked login button");
+    public void enterPassword(String passwordValue) {
+        enterText(password, passwordValue);
+    }
 
-	}
-	
-	
-	public static void validLogin(String email , String pwd) {	
-		enterText(emailAddress, email);
-		System.err.println("Entered login email id " + email);
-		enterText(password, pwd);
-        System.err.println("password entered");
-        
-	}
-	
+    public void clickLoginButton() {
+        wait.waitForClickability(loginButton).click();
+    }
 
+    public void validLogin(String email, String passwordValue) {
+        enterEmail(email);
+        enterPassword(passwordValue);
+        browserKeywords.scrollWindow();
+        clickLoginButton();
+    }
 
+    public String getLoginErrorMessage() {
+        return wait.waitForVisibility(loginErrorMessage).getText().trim();
+    }
 }

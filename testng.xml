@@ -11,7 +11,11 @@
 
 		<classes>
 			<class name="test.sinupTest" />
-		
+
+			<class name="test.contactUsFeatureTest" />
+			<class name="test.productTesting" />
+
+
 
 		</classes>
 

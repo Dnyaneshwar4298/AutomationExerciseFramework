@@ -7,26 +7,22 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import keywords.browserKeywords;
+import keywords.waitFor;
+import utility.AdHandler;
+import utility.ConfigReader;
 
 public class AccountInformationPage {
 
-    public AccountInformationPage() {
-        PageFactory.initElements(keywords.browserKeywords.getDriver(), this);
-    }
+    private final waitFor wait;
 
-    // Account Information
-
-    @FindBy(css = "[data-qa='password']") // encapsulation
+    @FindBy(css = "input[data-qa='password']")
     private WebElement password;
 
-    @FindBy(css = "input[data-qa='title']")
+    @FindBy(id = "id_gender1")
     private WebElement titleMr;
 
     @FindBy(id = "id_gender2")
     private WebElement titleMrs;
-
-
-    // Address Information
 
     @FindBy(css = "input[data-qa='first_name']")
     private WebElement firstName;
@@ -62,152 +58,143 @@ public class AccountInformationPage {
     private WebElement yearDropdown;
 
     @FindBy(css = "button[data-qa='create-account']")
-    private WebElement createAccountBtn;
+    private WebElement createAccountButton;
 
     @FindBy(css = "a[data-qa='continue-button']")
-    private WebElement continueBtn;
+    private WebElement continueButton;
 
-    @FindBy(xpath = "//b[text()='Account Created!']")
+    @FindBy(xpath = "//b[normalize-space()='Account Created!']")
     private WebElement accountCreated;
-    
-    @FindBy(css ="a[href=\"/logout\"]")
-    private WebElement logout;
 
-    //===================== Generic Methods =====================
+    @FindBy(css = "a[href='/logout']")
+    private WebElement logoutButton;
+
+    public AccountInformationPage() {
+        PageFactory.initElements(browserKeywords.getDriver(), this);
+        wait = new waitFor(browserKeywords.getDriver());
+    }
 
     private void enterText(WebElement element, String value) {
+        wait.waitForVisibility(element);
         element.clear();
         element.sendKeys(value);
     }
 
-    private void selectByVisibleText(WebElement element, String text) {
+    private void selectVisibleText(WebElement element, String text) {
+        wait.waitForVisibility(element);
         new Select(element).selectByVisibleText(text);
     }
 
-    private void selectByValue(WebElement element, String value) {
+    private void selectValue(WebElement element, String value) {
+        wait.waitForVisibility(element);
         new Select(element).selectByValue(value);
     }
 
-    private void selectByIndex(WebElement element, int index) {
+    private void selectIndex(WebElement element, int index) {
+        wait.waitForVisibility(element);
         new Select(element).selectByIndex(index);
     }
-    
-
-    //===================== project Methods =====================
-    
-    public void ClickOnlogoutBtn() {
-		logout.click();
-		System.out.println("clicked on LogoutButton");
-
-	}
 
     public void selectMrTitle() {
-        titleMr.click();
+        wait.waitForClickability(titleMr).click();
     }
 
     public void selectMrsTitle() {
-        titleMrs.click();
+        wait.waitForClickability(titleMrs).click();
     }
 
-    public void enterPassword(String pwd) {
-        enterText(password, pwd);
+    public void enterPassword(String value) {
+        enterText(password, value);
     }
 
-    public void enterFirstName(String fname) {
-        enterText(firstName, fname);
+    public void enterFirstName(String value) {
+        enterText(firstName, value);
     }
 
-    public void enterLastName(String lname) {
-        enterText(lastName, lname);
+    public void enterLastName(String value) {
+        enterText(lastName, value);
     }
 
-    public void enterAddress(String addr) {
-        enterText(address, addr);
+    public void enterAddress(String value) {
+        enterText(address, value);
     }
 
-    public void enterState(String stateName) {
-        enterText(state, stateName);
+    public void enterState(String value) {
+        enterText(state, value);
     }
 
-    public void enterCity(String cityName) {
-        enterText(city, cityName);
+    public void enterCity(String value) {
+        enterText(city, value);
     }
 
-    public void enterZipCode(String zip) {
-        enterText(zipCode, zip);
+    public void enterZipCode(String value) {
+        enterText(zipCode, value);
     }
 
-    public void enterMobileNumber(String mobile) {
-        enterText(mobileNumber, mobile);
+    public void enterMobileNumber(String value) {
+        enterText(mobileNumber, value);
     }
 
-    public void selectCountry(String countryName) {
-        selectByVisibleText(country, countryName);
+    public void selectCountry(String value) {
+        selectVisibleText(country, value);
     }
 
     public void selectDay(int index) {
-        selectByIndex(dayDropdown, index);
+        selectIndex(dayDropdown, index);
     }
 
-    public void selectMonth(String month) {
-        selectByVisibleText(monthDropdown, month);
+    public void selectMonth(String value) {
+        selectVisibleText(monthDropdown, value);
     }
 
-    public void selectYear(String year) {
-        selectByValue(yearDropdown, year);
+    public void selectYear(String value) {
+        selectValue(yearDropdown, value);
     }
 
     public void clickCreateAccount() {
-        createAccountBtn.click();
+        wait.waitForClickability(createAccountButton).click();
     }
 
-    public WebElement clickContinue() {
-        continueBtn.click();
-		return accountCreated;
+    public void verifyAccountCreated() {
+        Assert.assertTrue(
+                wait.waitForVisibility(accountCreated).isDisplayed(),
+                "Account Created message is not displayed");
     }
 
-    public boolean isAccountCreated() {
-        return accountCreated.isDisplayed();
+    public void clickContinue() {
+        // Close any ad overlay before clicking Continue.
+        AdHandler.closeAdIfPresent(browserKeywords.getDriver());
+        wait.waitForClickability(continueButton).click();
+        AdHandler.closeAdIfPresent(browserKeywords.getDriver());
     }
-    
-    public  void verifyAccountInformation() throws InterruptedException {
-    	enterPassword("Danny1234");
-    	
-    	System.err.println("password entered");
-    	selectDay(29);
-       selectMonth("April");
+
+    public void logout() {
+        wait.waitForClickability(logoutButton).click();
+    }
+
+    /**
+     * Completes the account information form.
+     * No Thread.sleep() is used; Selenium explicit waits handle synchronization.
+     */
+    public void completeAccountInformation() {
+        String passwordValue = ConfigReader.getProperty("password");
+
+        selectMrTitle();
+        enterPassword(passwordValue);
+        selectDay(29);
+        selectMonth("April");
         selectYear("1998");
-        System.err.println("DOB entered");
-     enterFirstName("Danny");
-        System.err.println("frirstname entered");
-       enterLastName("Patil");
-        System.err.println("lastname entered");
+        enterFirstName("Danny");
+        enterLastName("Patil");
         enterAddress("Pune Hinjewadi");
-        System.err.println("address entered");
-       selectCountry("Canada");
-        System.err.println("selected country");
+        selectCountry("Canada");
         enterState("Maharashtra");
-        System.err.println("state entered");
         enterCity("Pune");
-        System.err.println("city entered");
         enterZipCode("411057");
-        System.err.println("zipcode entered");
         enterMobileNumber("9876543210");
-        System.err.println("mobilenumber entered");
-        signupPage.scrollWindow();
+
         clickCreateAccount();
-        System.err.println("Clicked on Create button");
-        Thread.sleep(2000);
-        signupPage.scrollWindow();
-       clickContinue();
-      signupPage.closeAdPopup();
-       String actualresult = "Account Created!";
-
-       Assert.assertEquals(actualresult, "Account Created!");
-
-       System.out.println("Account Created Successfully");
-       //base.closeBrowser();
-       System.out.println(browserKeywords.getDriver().getCurrentUrl());
-
-	}
+        verifyAccountCreated();
+        clickContinue();
+    }
 }

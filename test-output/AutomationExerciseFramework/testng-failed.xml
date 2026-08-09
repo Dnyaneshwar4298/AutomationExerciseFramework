@@ -6,22 +6,12 @@
   </listeners>
   <test thread-count="5" name="AutomationExerciseTests(failed)">
     <classes>
-      <class name="test.sinupTest">
-        <methods>
-          <include name="setup"/>
-          <include name="verifyAccountInformation"/>
-        </methods>
-      </class> <!-- test.sinupTest -->
       <class name="test.productTesting">
         <methods>
-          <include name="VarifyAllProductVisibleOnScreen"/>
+          <include name="verifyAllProductsVisibleAndOpenFirstProduct"/>
+          <include name="setUp"/>
         </methods>
       </class> <!-- test.productTesting -->
-      <class name="test.contactUsFeatureTest">
-        <methods>
-          <include name="fillContactUsForm"/>
-        </methods>
-      </class> <!-- test.contactUsFeatureTest -->
     </classes>
   </test> <!-- AutomationExerciseTests(failed) -->
 </suite> <!-- Failed suite [AutomationExerciseFramework] -->

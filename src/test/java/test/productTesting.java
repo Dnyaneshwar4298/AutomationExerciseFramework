@@ -1,24 +1,28 @@
 package test;
 
-import java.awt.AWTException;
-
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.Test;
 
-import base.BaseClass;
+import base.baseClass;
+import keywords.browserKeywords;
 import pages.productPage;
+import utility.AdHandler;
 
+public class productTesting extends baseClass {
 
-public class productTesting {
 	
-	BaseClass base = new BaseClass();
-	productPage productPage;
-	@Test
-	public void VarifyAllProductVisibleOnScreen(){
-		base.openBrowser();
-		productPage = new productPage();
-		productPage.clickOnProduct();
-		productPage.isAllProductVisibleOnScreen();
-		productPage.clickOnFirstProduct();
-		base.closeBrowser();
-	}
+    @Test
+    public void verifyAllProductsVisibleAndOpenFirstProduct() {
+
+        productPage productPage = new productPage();
+        AdHandler AdHandler = new AdHandler();
+        
+       
+        productPage.clickOnProduct(); 
+        utility.AdHandler.closeAdIfPresent(driver);
+        productPage.isAllProductVisibleOnScreen();
+	
+        browserKeywords.scrollWindow();
+        productPage.clickOnFirstProduct();
+    }
 }

@@ -1,71 +1,94 @@
 package pages;
 
 import org.openqa.selenium.WebElement;
-
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import keywords.browserKeywords;
+import keywords.waitFor;
+import utility.AdHandler;
 
 public class homePage {
 
-	@FindBy(xpath = "//a[@href=\"/login\"]")
-	private WebElement singupLoginButton;
+    private final waitFor wait;
 
-	@FindBy(xpath = "//a[@href='/contact_us']")
-	private WebElement contactus;
+    @FindBy(css = "a[href='/login']")
+    private WebElement signupLoginButton;
 
-	@FindBy(css = "input[data-qa=\"name\"]")
-	private WebElement name;
+    @FindBy(css = "a[href='/contact_us']")
+    private WebElement contactUs;
 
-	@FindBy(css = "input[data-qa=\"email\"]")
-	private WebElement emailid;
+    @FindBy(css = "input[data-qa='name']")
+    private WebElement name;
 
-	@FindBy(css = "input[data-qa=\"subject\"]")
-	private WebElement subject;
+    @FindBy(css = "input[data-qa='email']")
+    private WebElement email;
 
-	@FindBy(css = "textarea[data-qa=\"message\"]")
-	private WebElement massage;
+    @FindBy(css = "input[data-qa='subject']")
+    private WebElement subject;
 
-	@FindBy(css = "input[name=\"upload_file\"]")
-	private WebElement uploadFile;
+    @FindBy(css = "textarea[data-qa='message']")
+    private WebElement message;
 
-	@FindBy(css = "input[data-qa=\"submit-button\"]")
-	private WebElement submitBtn;
+    @FindBy(css = "input[name='upload_file']")
+    private WebElement uploadFile;
 
-	@FindBy(xpath = "//div[@class=\"status alert alert-success\"]")
-	private WebElement responseMsg;
+    @FindBy(css = "input[data-qa='submit-button']")
+    private WebElement submitButton;
 
-	public homePage() {
+    @FindBy(css = "div.status.alert.alert-success")
+    private WebElement responseMessage;
 
-		PageFactory.initElements(browserKeywords.getDriver(), this);
-	}
+    @FindBy(xpath = "//a[contains(.,'Logged in as')]")
+    private WebElement loggedInUser;
 
-	public void clickSignUpLogin() {
-		singupLoginButton.click();
-	}
+    public homePage() {
+        PageFactory.initElements(browserKeywords.getDriver(), this);
+        wait = new waitFor(browserKeywords.getDriver());
+    }
 
-	public void clickContactUs() {
-		contactus.click();
-		System.err.println("contact form is opened ");
-	}
+    public void clickSignUpLogin() {
+        wait.waitForClickability(signupLoginButton).click();
+        AdHandler.closeAdIfPresent(browserKeywords.getDriver());
+    }
 
-	public void fillContactUsForm(String nme, String email, String subj, String msg) {
-		contactus.click();
-		System.err.println("contact form is opened ");
-		name.sendKeys(nme);
-		emailid.sendKeys(email);
-		subject.sendKeys(subj);
-		massage.sendKeys(msg);
-		pages.signupPage.scrollWindow();
-		uploadFile.sendKeys("/Users/danny/Library/Mobile Documents/com~apple~CloudDocs/Updated Resume /Automation");
-		signupPage.scrollWindow();
-		System.err.println("File Uploaded");
-		submitBtn.click();
-		System.err.println("Form submitted");
-		signupPage.alertHandling();
-	}
+    public void clickContactUs() {
+        wait.waitForClickability(contactUs).click();
+    }
 
+    public void fillContactUsForm(String userName, String userEmail,
+                                  String userSubject, String userMessage,
+                                  String filePath) {
 
+        clickContactUs();
 
+        wait.waitForVisibility(name).sendKeys(userName);
+        email.sendKeys(userEmail);
+        subject.sendKeys(userSubject);
+        message.sendKeys(userMessage);
+
+        if (filePath != null && !filePath.isBlank()) {
+            uploadFile.sendKeys(filePath);
+        }
+
+        submitButton.click();
+
+        try {
+            browserKeywords.getDriver().switchTo().alert().accept();
+        } catch (Exception ignored) {
+            // Browser alert is optional.
+        }
+    }
+
+    public String getResponseMessage() {
+        return wait.waitForVisibility(responseMessage).getText().trim();
+    }
+
+    public boolean isLoggedIn() {
+        try {
+            return wait.waitForVisibility(loggedInUser).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
