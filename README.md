@@ -1,8 +1,8 @@
 # 🚀 Automation Exercise Test Automation Framework
 
-A **Hybrid Test Automation Framework** built using **Java, Selenium WebDriver, TestNG, Cucumber BDD, Maven, and Page Object Model (POM)**.
+A **Hybrid Test Automation Framework** built using **Java, Selenium WebDriver, TestNG, Cucumber BDD, Maven, and Page Object Model (POM)** for automating the [Automation Exercise](https://automationexercise.com/) e-commerce application.
 
-This framework is designed to automate key functionalities of the [Automation Exercise](https://automationexercise.com/) e-commerce application while keeping the code **reusable, maintainable, scalable, and easy to understand**.
+The framework is designed with reusable page objects, common browser/wait keywords, configuration management, Cucumber step definitions, listeners, screenshots, logging, and test reporting.
 
 ---
 
@@ -15,76 +15,79 @@ QA Automation Engineer
 
 ## 📌 Project Overview
 
-This project automates important end-to-end scenarios of the **Automation Exercise** website.
+This project automates important functional and end-to-end scenarios of the **Automation Exercise** website.
 
 ### Application Under Test
 
 **Automation Exercise**
 https://automationexercise.com/
 
-### Main Functionalities Automated
+### Automated Areas
 
-* User Registration / Signup
+* User Signup / Registration
 * Login
+* Account Information
 * Product Validation
 * Product Details
 * Contact Us
 * Form Submission
 * File Upload
-* Page and Element Validation
-* Screenshot Capture on Test Failure
-* Cucumber BDD Scenarios
+* Screenshot capture
+* Cucumber BDD scenarios
+* TestNG-based execution
+* Allure reporting support
 
 ---
 
 # 🛠️ Technology Stack
 
-| Technology                    | Purpose                       |
-| ----------------------------- | ----------------------------- |
-| **Java 17**                   | Programming Language          |
-| **Selenium WebDriver 4.45.0** | Web UI Automation             |
-| **TestNG 7.12.0**             | Test Execution & Assertions   |
-| **Cucumber 7.18.1**           | BDD / Gherkin                 |
-| **Maven**                     | Build & Dependency Management |
-| **WebDriverManager 6.2.0**    | Browser Driver Management     |
-| **REST Assured 5.5.6**        | API Automation Support        |
-| **Allure 2.29.1**             | Test Reporting                |
-| **Git & GitHub**              | Version Control               |
-| **Jenkins**                   | CI/CD Execution               |
+| Technology             | Purpose                       |
+| ---------------------- | ----------------------------- |
+| **Java 17**            | Programming Language          |
+| **Selenium WebDriver** | Web UI Automation             |
+| **TestNG**             | Test Execution & Assertions   |
+| **Cucumber BDD**       | Behavior Driven Development   |
+| **Maven**              | Build & Dependency Management |
+| **WebDriverManager**   | Browser Driver Management     |
+| **REST Assured**       | API Automation Support        |
+| **Allure**             | Test Reporting                |
+| **Log4j2**             | Logging                       |
+| **Git / GitHub**       | Version Control               |
 
 ---
 
 # 🏗️ Framework Architecture
 
-The framework follows a combination of:
+The framework combines:
 
 * **Page Object Model (POM)**
-* **Page Factory**
 * **Cucumber BDD**
 * **TestNG**
 * **Reusable Keyword Methods**
 * **Utility Classes**
-* **Test Listeners**
 * **Configuration-driven execution**
+* **TestNG Listener**
+* **Screenshot Utility**
+* **Allure Reporting**
 
-### High-Level Execution Flow
+### Execution Flow
 
 ```text
-Feature File
-     ↓
-Step Definitions
-     ↓
+Feature File / Test Class
+          ↓
+Step Definitions / Test Methods
+          ↓
 Page Objects
-     ↓
-Reusable Keywords / Utilities
-     ↓
+          ↓
+Reusable Keywords & Utilities
+          ↓
 Selenium WebDriver
-     ↓
-Web Application
-     ↓
+          ↓
+Automation Exercise Application
+          ↓
 TestNG / Cucumber
-     ↓
-Reports + Screenshots
+          ↓
+Reports + Screenshots + Logs
 ```
 
 ---
@@ -95,10 +98,8 @@ Reports + Screenshots
 AutomationExerciseFramework
 │
 ├── src
-│   │
 │   ├── main
 │   │   ├── java
-│   │   │   │
 │   │   │   ├── base
 │   │   │   │   ├── baseClass.java
 │   │   │   │   └── Hooks.java
@@ -147,9 +148,9 @@ AutomationExerciseFramework
 │           └── listeners
 │               └── TestListener.java
 │
-├── screenshots
-├── allure-results
-├── test-output
+├── screenshots/
+├── allure-results/
+├── test-output/
 ├── pom.xml
 ├── testng.xml
 ├── .gitignore
@@ -162,52 +163,37 @@ AutomationExerciseFramework
 
 ## 1. Base Package
 
-The `base` package contains the common setup required before executing tests.
+The `base` package contains common test setup and Cucumber hooks.
 
 ### `baseClass.java`
 
-Responsible for common WebDriver initialization and browser-related setup.
-
-It provides a common foundation for test classes instead of repeating browser setup code in every test.
+Provides common WebDriver/browser initialization and setup functionality.
 
 ### `Hooks.java`
 
-Used with Cucumber to manage test execution setup and cleanup.
+Handles Cucumber lifecycle operations such as setup and cleanup around scenarios.
 
 ---
 
-# 2. Page Object Model
+## 2. Page Object Model
 
 The framework follows the **Page Object Model (POM)** design pattern.
 
-Each application page has a dedicated Java class containing:
+Each application page has a separate Java class containing:
 
 * Web elements
 * Locators
 * Page actions
-* Business methods
-
-### Example
-
-```java
-public void enterEmail(String email) {
-    emailField.sendKeys(email);
-}
-```
-
-Instead of writing Selenium code directly inside the test, the test can simply call:
-
-```java
-loginPage.enterEmail(email);
-```
+* Reusable business methods
 
 ### Benefits of POM
 
 * Reduces code duplication
 * Improves maintainability
 * Improves readability
-* Makes locator changes easier
-* Encourages reusable methods
+* Centralizes locators
+* Promotes reusable methods
+* Makes UI changes easier to handle
 
 ---
 
@@ -215,35 +201,21 @@ loginPage.enterEmail(email);
 
 The `keywords` package contains reusable Selenium operations.
 
-Examples include:
+### `browserKeywords.java`
 
-```text
-Browser operations
-Wait operations
-Element interactions
-```
+Contains reusable browser and element interaction operations.
 
-The purpose is to avoid repeatedly writing the same Selenium code throughout the framework.
+### `waitFor.java`
 
-For example:
+Provides reusable wait functionality for synchronizing test execution with the web application.
 
-```text
-Test
- ↓
-Page Method
- ↓
-Keyword Method
- ↓
-Selenium WebDriver
-```
-
-This makes the framework easier to maintain and extend.
+This avoids repeatedly writing common Selenium operations across test classes.
 
 ---
 
 # 4. Cucumber BDD
 
-The framework uses **Cucumber BDD** to describe test scenarios in business-readable language.
+The project uses **Cucumber BDD** to represent scenarios in Gherkin format.
 
 Feature files are stored under:
 
@@ -262,127 +234,45 @@ contactus.feature
 ### Example
 
 ```gherkin
-Feature: User Signup
+Feature: Product validation
 
-Scenario: Create a new user account
-
-Given user is on the Automation Exercise website
-When user clicks on Signup
-And user enters valid registration details
-Then user should be successfully registered
+Scenario: Verify products are visible
+  Given user is on the home page
+  When user navigates to products
+  Then all products should be displayed
 ```
 
-This makes test scenarios understandable to both:
-
-* Technical team members
-* Non-technical stakeholders
+Cucumber maps these Gherkin steps to Java step-definition classes.
 
 ---
 
-# 5. Step Definitions
-
-Step definitions connect Cucumber feature-file steps with Java automation code.
-
-For example:
-
-```text
-Feature File
-     ↓
-Step Definition
-     ↓
-Page Object
-     ↓
-Selenium
-```
-
-The framework contains step-definition classes for:
-
-* Signup
-* Product
-* Contact Us
-* Common actions
-
----
-
-# 6. Utility Package
-
-The `utility` package contains reusable helper classes.
-
-### `ConfigReader`
-
-Reads configuration values from:
-
-```text
-config.properties
-```
-
-This avoids hardcoding configuration values inside test classes.
-
-### `Screenshotutil`
-
-Captures screenshots during test execution, especially when a test fails.
-
-Screenshots are stored under:
-
-```text
-screenshots/
-```
-
-### `TestData`
-
-Provides reusable test data.
-
-### `AdHandler`
-
-Handles unwanted advertisements/popups that may interfere with Selenium execution.
-
----
-
-# 7. TestNG
+# 5. TestNG
 
 TestNG is used for:
 
 * Test execution
 * Assertions
-* Test organization
-* Test suite execution
+* Test lifecycle management
 * Listener integration
+* Test suite execution
 
-The TestNG suite is configured in:
+Test classes are maintained under:
 
 ```text
-testng.xml
+src/test/java/test/
+```
+
+The project also contains a Cucumber TestNG runner:
+
+```text
+src/test/java/runner/TestRunner.java
 ```
 
 ---
 
-# 8. Test Listener
+# 6. Configuration Management
 
-The framework contains a custom:
-
-```text
-TestListener.java
-```
-
-The listener can be used to perform actions based on test execution events.
-
-For example:
-
-```text
-Test Started
-     ↓
-Test Execution
-     ↓
-PASS / FAIL
-     ↓
-Screenshot / Reporting
-```
-
----
-
-# ⚙️ Configuration
-
-Framework configuration is maintained in:
+Test configuration is maintained in:
 
 ```text
 src/main/resources/config.properties
@@ -392,44 +282,90 @@ Example:
 
 ```properties
 browser=chrome
-url=https://automationexercise.com/
+baseUrl=https://automationexercise.com
+explicitWait=15
 ```
 
-This approach keeps configuration separate from the automation code.
-
-To change the browser, the configuration can be updated without modifying the test logic.
+The `ConfigReader` utility reads configuration values so that environment-specific settings do not need to be hard-coded throughout the framework.
 
 ---
 
-# 🧪 Automated Test Scenarios
+# 7. Utility Classes
 
-## Signup
+The `utility` package provides reusable framework-level functionality.
 
-* Navigate to Signup
-* Enter user details
-* Create a new account
-* Validate registration
+### `ConfigReader.java`
 
-## Login
+Reads values from the configuration file.
 
-* Login with valid credentials
-* Validate login functionality
-* Logout
+### `TestData.java`
 
-## Product
+Provides reusable test data.
 
-* Verify products
-* Open product details
-* Validate product information
-* Perform product-related actions
+### `Screenshotutil.java`
 
-## Contact Us
+Captures screenshots during test execution.
 
-* Open Contact Us page
-* Enter contact information
-* Upload a file
-* Submit the form
-* Validate success message
+### `AdHandler.java`
+
+Provides handling for advertisement/pop-up related elements encountered during execution.
+
+---
+
+# 8. Screenshot on Failure
+
+The framework includes screenshot support for test failures.
+
+Screenshots are stored under:
+
+```text
+screenshots/
+```
+
+Screenshots help with debugging and failure analysis.
+
+---
+
+# 9. Logging
+
+The project uses **Log4j2** for test execution logging.
+
+Logging helps to:
+
+* Track execution flow
+* Debug failures
+* Identify important framework events
+* Simplify troubleshooting
+
+---
+
+# 10. Reporting
+
+The framework supports multiple reporting outputs.
+
+### Cucumber Reports
+
+Cucumber reports can be generated under:
+
+```text
+target/
+```
+
+### Allure Results
+
+Allure result files are generated under:
+
+```text
+allure-results/
+```
+
+### TestNG Reports
+
+TestNG execution output is available under:
+
+```text
+test-output/
+```
 
 ---
 
@@ -439,11 +375,11 @@ To change the browser, the configuration can be updated without modifying the te
 
 Make sure the following are installed:
 
-* Java 17 or higher
+* Java JDK 17+
 * Maven
 * Git
-* Chrome / Firefox / Edge
-* IDE such as Eclipse or IntelliJ IDEA
+* Chrome browser
+* Eclipse / IntelliJ IDEA
 
 Verify Java:
 
@@ -459,244 +395,137 @@ mvn -version
 
 ---
 
-# 📦 Install Dependencies
+## Clone the Repository
 
-Run:
+```bash
+git clone <your-github-repository-url>
+cd AutomationExerciseFramework
+```
+
+---
+
+## Install Dependencies
 
 ```bash
 mvn clean install
 ```
 
-Maven will download the required dependencies from `pom.xml`.
-
 ---
 
-# ▶️ Run Tests
-
-### Using Maven
+## Run Tests
 
 ```bash
 mvn test
 ```
 
-### Using TestNG
-
-Open:
+You can also execute the project using:
 
 ```text
 testng.xml
 ```
 
-Then:
-
-```text
-Right Click
-     ↓
-Run As
-     ↓
-TestNG Suite
-```
-
 ---
 
-# 🥒 Running Cucumber Tests
+# 📊 Reports
 
-Cucumber tests can be executed through:
+After execution, check:
 
-```text
-TestRunner.java
-```
-
-The runner connects:
-
-```text
-Feature Files
-      ↓
-Step Definitions
-      ↓
-Test Execution
-```
-
----
-
-# 📊 Test Reports
-
-## TestNG Report
-
-After execution, TestNG results are available under:
+### TestNG
 
 ```text
 test-output/
 ```
 
----
+### Cucumber
 
-## Allure Report
+```text
+target/
+```
 
-After test execution, Allure result files are generated in:
+### Allure
 
 ```text
 allure-results/
 ```
 
-Generate the report using:
+To generate and open an Allure report:
 
 ```bash
 allure serve allure-results
 ```
 
-This opens the Allure report in the browser.
-
-The report provides information such as:
-
-* Passed tests
-* Failed tests
-* Skipped tests
-* Test duration
-* Test details
-
 ---
 
-# 📸 Screenshots
+# 🔄 Git Workflow
 
-Screenshots captured during execution are stored in:
-
-```text
-screenshots/
-```
-
-Screenshots are useful for debugging failed automation scenarios.
-
----
-
-# 🔄 CI/CD Integration
-
-The framework is suitable for execution through **Jenkins**.
-
-Typical CI/CD flow:
-
-```text
-Developer Push
-      ↓
-GitHub
-      ↓
-Jenkins
-      ↓
-Maven Build
-      ↓
-Test Execution
-      ↓
-Test Reports
-      ↓
-Failure Screenshots
-```
-
-A Jenkins job can execute:
+Typical workflow used for this project:
 
 ```bash
-mvn clean test
+git status
+git add .
+git commit -m "Update automation framework"
+git push origin main
 ```
 
-This allows the automation suite to run automatically as part of a CI/CD pipeline.
+---
+
+# 🧪 Test Coverage
+
+| Module              | Coverage |
+| ------------------- | -------- |
+| Signup              | ✅        |
+| Login               | ✅        |
+| Account Information | ✅        |
+| Products            | ✅        |
+| Product Details     | ✅        |
+| Contact Us          | ✅        |
+| File Upload         | ✅        |
+| Screenshot Capture  | ✅        |
+| Cucumber BDD        | ✅        |
+| TestNG              | ✅        |
+| Allure Reporting    | ✅        |
+| Logging             | ✅        |
 
 ---
 
-# 🔑 Key Framework Advantages
+# 🚀 Future Enhancements
 
-### Reusable
+The framework can be further enhanced with:
 
-Common Selenium operations are centralized into reusable methods.
-
-### Maintainable
-
-Page Objects separate locators and application actions from test logic.
-
-### Scalable
-
-New pages, features, and scenarios can be added without changing the complete framework.
-
-### Readable
-
-Cucumber feature files describe scenarios in simple business language.
-
-### Configurable
-
-Browser and application settings are maintained separately.
-
-### Debuggable
-
-Screenshots and reports help identify failed test cases.
+* Cross-browser execution
+* Parallel execution
+* Environment-based configuration
+* CI/CD integration with Jenkins
+* API + UI combined test flows
+* Docker execution
+* Improved test data management
+* Retry mechanism for failed tests
+* Enhanced Allure attachments
+* Selenium Grid / BrowserStack execution
 
 ---
 
-# 🎯 Design Principles Used
+# 🎯 Key Framework Benefits
 
-The framework follows several automation best practices:
-
-* Page Object Model
-* Page Factory
-* Separation of Test and Page Logic
-* Reusable Methods
-* Configuration Management
-* Explicit Waits
-* TestNG Assertions
-* Cucumber BDD
-* Screenshot Capture
-* Reporting
-* Maven Dependency Management
-* Version Control using Git
+* **Reusable** – Common operations are centralized.
+* **Maintainable** – POM keeps locators and page actions organized.
+* **Scalable** – New pages and scenarios can be added easily.
+* **Readable** – Cucumber scenarios are written in business-readable language.
+* **Debuggable** – Logging and screenshots help identify failures.
+* **Reportable** – TestNG, Cucumber, and Allure reporting support is available.
+* **Maven-based** – Dependencies and execution are managed through Maven.
 
 ---
 
-# 💡 Why This Framework?
+# ⭐ Project Highlights
 
-This project demonstrates practical knowledge of modern QA automation concepts including:
+**Java + Selenium + TestNG + Cucumber + Maven + POM + Allure + Log4j2**
 
-```text
-Java
-+
-Selenium
-+
-TestNG
-+
-Cucumber BDD
-+
-POM
-+
-Maven
-+
-Git
-+
-Jenkins
-+
-Reporting
-```
-
-It is designed to demonstrate how a real-world UI automation framework can be structured for **maintainability, reusability, and continuous integration**.
+This project demonstrates a practical and maintainable UI automation framework suitable for real-world QA automation projects and interview demonstrations.
 
 ---
 
-# 👨‍💻 Skills Demonstrated
+## 📬 Contact
 
-* Manual Testing
-* Automation Testing
-* Selenium WebDriver
-* Java
-* TestNG
-* Cucumber BDD
-* Page Object Model
-* Maven
-* Git & GitHub
-* Jenkins
-* API Testing
-* REST Assured
-* SQL
-* Allure Reporting
-
----
-
-## ⭐ GitHub Repository
-
-https://github.com/Dnyaneshwar4298/AutomationExerciseFramework
-
-If you find this project useful, feel free to ⭐ the repository.
+**Dnyaneshwar Todmal**
+QA Automation Engineer
