@@ -76,7 +76,7 @@ public class homePage {
         try {
             browserKeywords.getDriver().switchTo().alert().accept();
         } catch (Exception ignored) {
-            // Browser alert is optional.
+           
         }
     }
 

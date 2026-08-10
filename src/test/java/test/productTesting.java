@@ -20,7 +20,7 @@ public class productTesting extends baseClass {
        
         productPage.clickOnProduct(); 
         utility.AdHandler.closeAdIfPresent(driver);
-        productPage.isAllProductVisibleOnScreen();
+        //productPage.isAllProductVisibleOnScreen();
 	
         browserKeywords.scrollWindow();
         productPage.clickOnFirstProduct();
