@@ -1,6 +1,7 @@
 package stepdefinations;
 
 import io.cucumber.java.en.Given;
+import pages.productPage;
 
 public class CommonSteps {
 
@@ -9,4 +10,6 @@ public class CommonSteps {
 
         System.out.println("Automation Exercise website opened");
     }
+    
+  
 }

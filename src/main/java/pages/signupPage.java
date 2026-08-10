@@ -12,32 +12,90 @@ public class signupPage {
 
     private final waitFor wait;
 
+
     @FindBy(name = "name")
     private WebElement newUserName;
+
 
     @FindBy(css = "input[data-qa='signup-email']")
     private WebElement newUserEmail;
 
+
     @FindBy(css = "button[data-qa='signup-button']")
     private WebElement signupButton;
 
+
+    // Existing email error message
+    @FindBy(xpath = "//form[@action='/signup']//p")
+    private WebElement existingEmailError;
+
+
     public signupPage() {
-        PageFactory.initElements(browserKeywords.getDriver(), this);
+
+        PageFactory.initElements(
+                browserKeywords.getDriver(),
+                this
+        );
+
         wait = new waitFor(browserKeywords.getDriver());
     }
 
-    public void enterSignupCredentials(String name, String email) {
-        wait.waitForVisibility(newUserName).sendKeys(name);
+
+    // Existing method
+    public void enterSignupCredentials(
+            String name,
+            String email) {
+
+        wait.waitForVisibility(newUserName)
+                .sendKeys(name);
+
         newUserEmail.sendKeys(email);
+
         browserKeywords.scrollWindow();
-        wait.waitForClickability(signupButton).click();
+
+        wait.waitForClickability(signupButton)
+                .click();
     }
 
-    public void enterExistingSignupCredentials(String name, String email) {
+
+    // Existing method
+    public void enterExistingSignupCredentials(
+            String name,
+            String email) {
+
         enterSignupCredentials(name, email);
     }
 
+
+    // New method
+    public boolean isExistingEmailErrorDisplayed() {
+
+        try {
+
+            return wait
+                    .waitForVisibility(existingEmailError)
+                    .isDisplayed();
+
+        } catch (Exception e) {
+
+            return false;
+        }
+    }
+
+
+    // New method
+    public String getExistingEmailErrorMessage() {
+
+        return wait
+                .waitForVisibility(existingEmailError)
+                .getText()
+                .trim();
+    }
+
+
+    // Existing method
     public void scrollWindow() {
+
         new Actions(browserKeywords.getDriver())
                 .scrollByAmount(0, 400)
                 .perform();
