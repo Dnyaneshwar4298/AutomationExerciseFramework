@@ -41,7 +41,7 @@ public class signupPage {
     }
 
 
-    // Existing method
+
     public void enterSignupCredentials(
             String name,
             String email) {
@@ -58,7 +58,7 @@ public class signupPage {
     }
 
 
-    // Existing method
+
     public void enterExistingSignupCredentials(
             String name,
             String email) {
@@ -67,7 +67,7 @@ public class signupPage {
     }
 
 
-    // New method
+
     public boolean isExistingEmailErrorDisplayed() {
 
         try {
@@ -83,7 +83,7 @@ public class signupPage {
     }
 
 
-    // New method
+
     public String getExistingEmailErrorMessage() {
 
         return wait
@@ -93,7 +93,7 @@ public class signupPage {
     }
 
 
-    // Existing method
+   
     public void scrollWindow() {
 
         new Actions(browserKeywords.getDriver())

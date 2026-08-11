@@ -68,7 +68,7 @@ public class loginPage {
     }
 
 
-    // New method for invalid login
+ 
     public void invalidLogin(String email, String passwordValue) {
 
         enterEmail(email);
