@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import base.baseClass;
 import keywords.browserKeywords;
-import pages.homePage;
+import pages.HomePage;
 import utility.ConfigReader;
 
 public class contactUsFeatureTest extends baseClass {
@@ -13,7 +13,7 @@ public class contactUsFeatureTest extends baseClass {
     @Test
     public void fillContactUsForm() {
 
-        homePage homePage = new homePage();
+        HomePage homePage = new HomePage();
 
         homePage.fillContactUsForm(
                 ConfigReader.getProperty("contactName"),

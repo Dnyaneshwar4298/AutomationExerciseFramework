@@ -1,15 +1,22 @@
 package stepdefinations;
 
 import io.cucumber.java.en.Given;
-import pages.productPage;
+import keywords.browserKeywords;
 
 public class CommonSteps {
 
     @Given("I am on the Automation Exercise website")
     public void userOpensAutomationExerciseWebsite() {
 
-        System.out.println("Automation Exercise website opened");
+        browserKeywords.getDriver()
+                .get("https://automationexercise.com/");
     }
-    
-  
+
+
+    @Given("user launches the Automation Exercise website")
+    public void userLaunchesTheAutomationExerciseWebsite() {
+
+        browserKeywords.getDriver()
+                .get("https://automationexercise.com/");
+    }
 }

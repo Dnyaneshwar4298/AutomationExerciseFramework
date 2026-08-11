@@ -3,7 +3,7 @@ package stepdefinations;
 import org.testng.Assert;
 
 import base.baseClass;
-import pages.homePage;
+import pages.HomePage;
 import utility.ConfigReader;
 
 
@@ -12,7 +12,7 @@ import io.cucumber.java.en.Then;
 
 public class ContactUsStepDefinition extends baseClass {
 
-    private homePage homePage;
+    private HomePage homePage;
 
 
     @When("I fill the Contact Us form with valid details and I submit the Contact Us form")

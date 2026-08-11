@@ -8,7 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import keywords.browserKeywords;
 import pages.AccountInformationPage;
-import pages.homePage;
+import pages.HomePage;
 import pages.loginPage;
 import pages.signupPage;
 import utility.ConfigReader;
@@ -16,7 +16,7 @@ import utility.TestData;
 
 public class SignupSteps extends baseClass {
 
-    homePage homePage;
+    HomePage homePage;
     signupPage signupPage;
     AccountInformationPage accountPage;
     loginPage loginPage;
@@ -32,7 +32,7 @@ public class SignupSteps extends baseClass {
     @When("I navigate to the Signup and Login page")
     public void userClicksOnSignupLogin() {
 
-        homePage = new homePage();
+        homePage = new HomePage();
         signupPage = new signupPage();
         accountPage = new AccountInformationPage();
         loginPage = new loginPage();

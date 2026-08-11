@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import base.baseClass;
-import pages.homePage;
+import pages.HomePage;
 import pages.loginPage;
 import utility.ConfigReader;
 import utility.TestData;
@@ -13,7 +13,7 @@ public class loginTest extends baseClass {
 
     @Test(dependsOnGroups = "registration")
     public void verifyValidLogin() {
-        homePage homePage = new homePage();
+        HomePage homePage = new HomePage();
         loginPage loginPage = new loginPage();
 
         homePage.clickSignUpLogin();

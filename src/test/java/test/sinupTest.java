@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import base.baseClass;
 import keywords.browserKeywords;
 import pages.AccountInformationPage;
-import pages.homePage;
+import pages.HomePage;
 import pages.loginPage;
 import pages.signupPage;
 import utility.ConfigReader;
@@ -17,7 +17,7 @@ public class sinupTest extends baseClass {
     @Test(groups = "registration")
     public void registerLogoutAndLoginWithSameEmail() {
 
-        homePage homePage = new homePage();
+        HomePage homePage = new HomePage();
         signupPage signupPage = new signupPage();
         AccountInformationPage accountPage = new AccountInformationPage();
         loginPage loginPage = new loginPage();

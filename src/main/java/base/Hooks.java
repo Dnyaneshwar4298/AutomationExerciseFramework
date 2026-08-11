@@ -27,4 +27,6 @@ public final class Hooks {
         browserKeywords.closeBrowser();
         driver = null;
     }
+
+	
 }
